@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Rakuten Anti Mail Magazine",
+  "version": "1.3.4",
+  "description": "楽天のメルマガ受信チェックボックスを自動でオフにします。",
+  "content_scripts": [
+    {
+      "matches": [
+         "https://order.step.rakuten.co.jp/rms/mall/basket/vc*"
+        ,"https://basket.step.rakuten.co.jp/rms/mall/bs/confirmorder/*"
+        ,"https://basket.step.rakuten.co.jp/rms/mall/bs/confirmorderquicknormalize/*"
+        ,"https://ask.step.rakuten.co.jp/rms/mall/pa/ask/vc"
+        ,"https://books.step.rakuten.co.jp/rms/mall/book/bs/QuickConfirmOrder"
+        ,"https://books.step.rakuten.co.jp/rms/mall/book/bs/ConfirmOrder"
+        ,"https://rsvh.travel.rakuten.co.jp/rsv/RsvInput.do*"
+        ,"https://prize.travel.rakuten.co.jp/frt/confirm.do"
+        ,"https://auction.step.rakuten.co.jp/rms/mall/sa/vc*"
+        ,"https://sa.step.rakuten.co.jp/rms/mall/sa/vc"
+        ,"https://delivery.rakuten.co.jp/?module=Default&action=OrderStep"
+      ],
+      "js": [
+        "unchecker.js"
+      ]
+    }
+  ],
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+  "permissions": [
+  ]
+}
