@@ -3,14 +3,14 @@
 -----
 
 ##About
-This tool works as extention of Google Chrome.  
-When you confirm order on rakuten, uncheck all checkboxes of mailmagazine onece.
+This tool works as a Google Chrome Extension.  
+When you confirm order on rakuten, uncheck all checkboxes of mailmagazine once.
 
 
 ##Directory structure
 
 * package  
-This directory will be compressed, and  be uploaded  to Chrome Web Store.
+This directory is compressed, and uploaded to Chrome Web Store.  
 
 * promotion  
 This directory stores promotion image files and their sources.
