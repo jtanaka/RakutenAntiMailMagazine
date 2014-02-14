@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Rakuten Anti Mail Magazine Options</title>
+    <link rel="stylesheet" href="options.css">
+    <script src="jquery-2.0.3.min.js"></script>
+    <script src="options.js"></script>
+  </head>
+<body>
+
+  <h1>Rakuten Anti Mail Magazine</h1>
+
+  <h2>設定</h2>
+  <div id="status"></div>
+  <hr>
+
+  <h3>ターゲット</h3>
+  <button id="btnEditTargets">編集</button>
+  <button id="btnSaveTargets"><span style="color:red;">保存</span></button>
+  <button id="btnCancel">キャンセル</button>
+  <button id="btnRestoreTargets">初期状態を復元</button></br>
+  <p class="remarks">ターゲットの指定には、ワイルドカード"*"を使用できます。ターゲットのURLに"*"を入れるとそれ以降は全てがターゲットになります。</br>【例】ターゲットURLが "http://hoge.com/abc/*" の場合、"http://hoge.com/abc/def/gh" もターゲットに含まれます。</br>【注意】ターゲットURLの途中に"*"を入れても、それ以降は全てがターゲットになります。</p>
+  <textarea id="txtTargets"></textarea>
+
+</body>
+
+</html>
+

@@ -1,8 +1,11 @@
+
 /**
  * Uncheck all checkboxes in specified form.
  * @param {Object} form object contains checkboxs.
  */
 function uncheckAll( f ){	
+  //console.log('uncheckAll');
+
 	var len = f.elements.length;
 	var i;
 	var e;
@@ -15,11 +18,18 @@ function uncheckAll( f ){
 }
 
 /**
- * Execute uncheck.
+ * Execute uncheckAll if the url is target.
  */
-var len = document.forms.length;
-var i;
-for (i=0; i<len; i++){
-	uncheckAll(document.forms[i]);
-}
+chrome.runtime.sendMessage({action: "IsTarget"}, function(response) {
+  //console.log(response.result);
+
+  if (response.result === true) {
+    var len = document.forms.length;
+    var i;
+    for (i=0; i<len; i++){
+    	uncheckAll(document.forms[i]);
+    }
+  }
+  
+});
 
