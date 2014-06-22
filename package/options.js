@@ -1,19 +1,3 @@
-var defSettings = {
-  "targets": [
-     "https://order.step.rakuten.co.jp/rms/mall/basket/vc*"
-    ,"https://basket.step.rakuten.co.jp/rms/mall/bs/confirmorder/*"
-    ,"https://basket.step.rakuten.co.jp/rms/mall/bs/confirmorderquicknormalize/*"
-    ,"https://ask.step.rakuten.co.jp/rms/mall/pa/ask/vc"
-    ,"https://books.step.rakuten.co.jp/rms/mall/book/bs/QuickConfirmOrder"
-    ,"https://books.step.rakuten.co.jp/rms/mall/book/bs/ConfirmOrder"
-    ,"https://rsvh.travel.rakuten.co.jp/rsv/RsvInput.do*"
-    ,"https://prize.travel.rakuten.co.jp/frt/confirm.do"
-    ,"https://auction.step.rakuten.co.jp/rms/mall/sa/vc*"
-    ,"https://sa.step.rakuten.co.jp/rms/mall/sa/vc"
-    ,"https://delivery.rakuten.co.jp/?module=Default&action=OrderStep"
-   ]
-};
-
 // Save targets to local storage.
 function SaveTargets(){
   var text = $("#txtTargets").val().replace(/\r\n|\r/g, "\n");
@@ -87,9 +71,13 @@ $(function() {
     EditTargets(false);
   });
   // 【初期状態を復元】ボタン
-  $("#btnRestoreTargets").click(function(){
-    // ロードのみ、保存はしない
-    LoadTargets(defSettings.targets);
+  $("#btnRestoreTargets").click(function () {
+    chrome.runtime.sendMessage({ action: "GetDefSettings" }, function (defSettings) {
+      //console.log(response.defSettings);
+
+      // ロードのみ、保存はしない
+      LoadTargets(defSettings.targets);
+    });
   });
 
 });

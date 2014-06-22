@@ -1,3 +1,18 @@
+var defSettings = {
+  "targets": [
+     "https://order.step.rakuten.co.jp/rms/mall/basket/vc*"
+    ,"https://basket.step.rakuten.co.jp/rms/mall/bs/confirmorder/*"
+    ,"https://basket.step.rakuten.co.jp/rms/mall/bs/confirmorderquicknormalize/*"
+    ,"https://ask.step.rakuten.co.jp/rms/mall/pa/ask/vc"
+    ,"https://books.step.rakuten.co.jp/rms/mall/book/bs/QuickConfirmOrder"
+    ,"https://books.step.rakuten.co.jp/rms/mall/book/bs/ConfirmOrder"
+    ,"https://rsvh.travel.rakuten.co.jp/rsv/RsvInput.do*"
+    ,"https://prize.travel.rakuten.co.jp/frt/confirm.do"
+    ,"https://auction.step.rakuten.co.jp/rms/mall/sa/vc*"
+    ,"https://sa.step.rakuten.co.jp/rms/mall/sa/vc"
+    ,"https://delivery.rakuten.co.jp/?module=Default&action=OrderStep"
+   ]
+};
 
 // The app runtime loads the event page from a user's desktop and the onLaunch() event is fired.
 // This event tells the event page what windows to launch and their dimensions.
@@ -5,6 +20,40 @@
 //chrome.app.runtime.onLaunched.addListener(function() { 
 //  //console.log("chrome.app.runtime.onLaunched.addListener");
 //});
+
+//Fired when the extension is first installed, when the extension is updated to a new version,
+// and when Chrome is updated to a new version.
+chrome.app.runtime.onInstalled.addListener(function(details) { 
+  //console.log("chrome.app.runtime.onInstalled.addListener");
+
+  if (details.reason == "install") {
+    //console.log("This is a first install!");
+
+    // Initialize setting.
+    localStorage.txtTargets = JSON.stringify(defSettings.targets);
+
+    // Open options page to notify existance.
+    chrome.tabs.create({
+      url: chrome.extension.getURL('options.html')
+    });
+  } else if (details.reason == "update") {
+    //var thisVersion = chrome.runtime.getManifest().version;
+    //console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
+
+    // 1.4 までのインストール時にターゲットが初期化されないバグ対応
+    if (parseFloat(details.previousVersion) <= 1.4) {
+      // If the user has no targets.
+      if (localStorage.txtTargets === null || localStorage.txtTargets === "") {
+        // Initialize settings.
+        localStorage.txtTargets = JSON.stringify(defSettings.targets);
+        // Open options page to notify existance.
+        chrome.tabs.create({
+          url: chrome.extension.getURL('options.html')
+        });
+      }
+    }
+  }
+});
 
 // The app runtime sends the onSuspend() event to the event page before unloading it.
 // Your event page can listen out for this event and do clean-up tasks before the app closes.
@@ -23,6 +72,9 @@ chrome.runtime.onMessage.addListener(
       case "IsTarget":
         var isTarget = IsTarget(sender.tab.url);
         sendResponse({result: isTarget});
+        break;
+      case "GetDefSettings":
+        sendResponse(defSettings);
         break;
       default:
         //console.log("The unknown action type has detected!");
