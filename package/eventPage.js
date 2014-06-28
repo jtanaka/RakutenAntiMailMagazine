@@ -23,10 +23,10 @@ var defSettings = {
 
 //Fired when the extension is first installed, when the extension is updated to a new version,
 // and when Chrome is updated to a new version.
-chrome.app.runtime.onInstalled.addListener(function(details) { 
+chrome.runtime.onInstalled.addListener(function(details) { 
   //console.log("chrome.app.runtime.onInstalled.addListener");
 
-  if (details.reason == "install") {
+  if (details.reason === "install") {
     //console.log("This is a first install!");
 
     // Initialize setting.
@@ -36,14 +36,14 @@ chrome.app.runtime.onInstalled.addListener(function(details) {
     chrome.tabs.create({
       url: chrome.extension.getURL('options.html')
     });
-  } else if (details.reason == "update") {
+  } else if (details.reason === "update") {
     //var thisVersion = chrome.runtime.getManifest().version;
     //console.log("Updated from " + details.previousVersion + " to " + thisVersion + "!");
 
     // 1.4 までのインストール時にターゲットが初期化されないバグ対応
     if (parseFloat(details.previousVersion) <= 1.4) {
       // If the user has no targets.
-      if (localStorage.txtTargets === null || localStorage.txtTargets === "") {
+      if (localStorage.txtTargets == null || localStorage.txtTargets === "") {
         // Initialize settings.
         localStorage.txtTargets = JSON.stringify(defSettings.targets);
         // Open options page to notify existance.
