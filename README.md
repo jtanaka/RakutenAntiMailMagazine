@@ -1,11 +1,8 @@
-#RakutenAntiMailMagazine for Google Chrome Extension
-
------
+#Rakuten Anti Mail Magazine
 
 ##About
-This tool works as a Google Chrome Extension.  
-When you confirm order on rakuten, uncheck all checkboxes of mailmagazine once.
-
+Rakuten Anti Mail Magazine is a Google Chrome Extension.  
+When you order on Rakuten, all checkboxes for recieving mailmagazine are unchecked once.  
 
 ##Directory structure
 
@@ -15,8 +12,8 @@ This directory is compressed, and uploaded to Chrome Web Store.
 * promotion  
 This directory stores promotion image files and their sources.
 
-##How to install
-You can install this tool directly at [Chrome Web Store][download].  
+##Install
+You can install Rakuten Anti Mail Magazine at [Chrome Web Store][download].  
 
 -----
 
